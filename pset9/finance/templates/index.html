@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks
+{% endblock %}
+
+{% block main %}
+
+    <h2>{{username}}'s Stocks</h2>
+    <table id="table1">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Share value</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+            {% for stock in stocks %}
+            <tr>
+                <td>{{stock.symbol}}</td>
+                <td>{{stock.name}}</td>
+                <td>{{stock.amount}}</td>
+                <td>${{stock.stock_value}}</td>
+                <td>
+                    <form action="/" method="post">
+                        <input class="form-control" name="shares" placeholder="Amount" type="number" min="1" required>
+                        <button class="btn btn-primary" type="submit" formaction="{{ url_for('buy',symbol = stock.symbol) }}" value="buy">Buy</button>
+                        <button class="btn btn-primary" type="submit" formaction="{{ url_for('sell',symbol = stock.symbol) }}" value="sell">Sell</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <h2>Balance</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Total share value</th>
+                <th>Cash</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${{total_share}}</td>
+                <td>${{cash}}</td>
+                <td>
+                    ${{total}}
+                    <form action="/" method="post">
+                        <input class="form-control" name="cash_bonus" placeholder="Amount" type="number" min="1" required>
+                        <button class="btn btn-primary" type="submit" name="transaction" value="Add cash">Add cash</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

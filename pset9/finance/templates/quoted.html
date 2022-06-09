@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <input name="symbol" placeholder="Stock’s symbol" type="text">
+
+        <input type="submit" value="Look up">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+            <tr>
+                <td>{{symbol}}</td>
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
